@@ -1,0 +1,112 @@
+How to Run Code:
+
+This code is meant to be run through the Command Line(For example:Windows CMD,VSCode Terminal,Linux Terminal etc.) 
+as a python command. I have used commands 'python','py' and  'python3' for all these examples 
+I use 'py' for testing because 'python' doesn't work for me.
+If 'python' doesn't work try the alternate 'py' or 'python3' commands I have written
+
+Run the command only when code.py is in the current directory
+
+Info about how images are output:
+
+When the program is first run a directory called 'outputs' with subfolders, 'problem1','problem2','problem3','problem4' will be created.
+These folders will contain all the related pictures generated through the program
+(All relevant pictures will be written into these folders when a command is executed)
+All images are WRITTEN through imwrite and NOT DISPLAYED, all of them are named appropriately.
+
+In addition to the intermediate(and final) images written to the outputs folder,
+the final image generated will also be written to 'output.jpg'(this is a default) in the current directory
+
+Dependencies:
+
+Python modules: os,numpy,random,opencv-python,argsparse
+These modules are required to run the program
+
+Universal Command Line arguments(Are used in the main() function):
+
+'-pn','--problem';choose a problem number;choice={1,2,3,4},
+'-i','--input_image';choose file for the input image,
+'-o','--output_file';choose file to output image(like 'output.jpg' which is the default)
+
+ALL COMMAND LINE ARGUMENTS HAVE APPROPRIATE DEFAULTS.
+AN ERROR WILL BE PROMPTED IF YOU PASS THE WRONG DATATYPE FOR AN ARGUMENT(EG. FLOAT TO INT WILL GIVE AN ERROR,BUT INT TO FLOAT IS FINE)
+IF A VALUE OUT OF RANGE IS PASSED THROUGH THE COMMAND LINE, THIS VALUE WILL BE RETURNED TO ITS DEFAULT
+
+The rest of the Command Line arguments have been documented next to their respective commands
+
+Commands for Problem 1:
+
+For 'simple' mode:
+python code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -ev 0.9 -p 0.4 -lt 0.2 -m1 simple
+py code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -ev 0.9 -p 0.4 -lt 0.2 -m1 simple
+python3 code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -ev 0.9 -p 0.4 -lt 0.2 -m1 simple
+
+For 'rainbow' mode:
+python code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -p 0.4 -lt 0.2 -m1 rainbow
+py code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -p 0.4 -lt 0.2 -m1 rainbow
+python3 code.py -pn 1 -i face2.jpg -dc 0.6 -bc 0.6 -p 0.4 -lt 0.2 -m1 rainbow
+
+Arguments:
+'-dc','--darkening_coefficient';the darkening coefficient;range={0.0,1.0},
+'-bc','--blending_coefficient';the blending coefficient;range={0.0,1.0},
+'-ev','--evaporation_coefficient';determines how fast a 'simple' leak diminishes;range={0.0,1.0},
+'-p','--pos';column to apply the leak to,treat the value like  a percentile;range={0.0,0.8}
+'-lt','--leak_thickness';thickness of the leak;range={0.0,0.49},
+'-m1','--mode1';choose between simple and rainbow;choice={'simple','rainbow'}
+
+Commands for Problem 2:
+
+For 'mono' mode:
+python code.py -pn 2 -m2 mono -i face2.jpg -bc 0.35 -g 0.25 -ks 12
+py code.py -pn 2 -m2 mono -i face2.jpg -bc 0.35 -g 0.25 -ks 12
+python3 code.py -pn 2 -m2 mono -i face2.jpg -bc 0.35 -g 0.25 -ks 12
+
+For 'colour' mode:
+python code.py -pn 2 -m2 colour -i face1.jpg  -bc 0.3 -gV 0 -rbR 0.5
+py code.py -pn 2 -m2 colour -i face1.jpg  -bc 0.3 -gV 0 -rbR 0.5
+python3 code.py -pn 2 -m2 colour -i face1.jpg  -bc 0.3 -gV 0 -rbR 0.5
+
+Arguments:
+'-bc','--blending_coefficient';the blending coefficient;range={0.0,1.0},
+'-g','--g_factor';the strength of the brightness gradient used in 'mono';range={0.0,1.0}
+'-ks','--kernel_size';size of kernel matrix used to apply pencil like convolutions in 'mono';range={0,shape.rows+shape.cols}
+'-gV','--green_value';adjustable green channel value used for the coloured pencil effect;range={0,255},
+'-rbR','--rb_noise_ratio';adjustable blending strength between the red and blue coloured pencil noise textures;range={0.0,1.0}
+'-m2','--mode2';choose between mono and coloured;choice={'simple','rainbow'}
+
+Commands for Problem 3:
+
+LUTs and image Sharpening:
+python code.py -pn 3 -i face1.jpg -br 0.6 -dc 0.0 -iL T -iS T -iH F
+py code.py -pn 3 -i face1.jpg -br 0.6 -dc 0.0 -iL T -iS T -iH F
+python3 code.py -pn 3 -i face1.jpg -br 0.6 -dc 0.0 -iL T -iS T -iH F
+
+Only Histogram Equalization using YCbCr:
+python code.py -pn 3 -i face2.jpg -br 0.4 -dc 0.3 -iL F -iS F -iH T
+py code.py -pn 3 -i face2.jpg -br 0.4 -dc 0.3 -iL F -iS F -iH T
+python3 code.py -pn 3 -i face2.jpg -br 0.4 -dc 0.3 -iL F -iS F -iH T
+
+All 3 filters:
+python code.py -pn 3 -i face2.jpg -br 0.5 -dc 0.2 -iL T -iS T -iH T
+py code.py -pn 3 -i face2.jpg -br 0.5 -dc 0.2 -iL T -iS T -iH T
+python3 code.py -pn 3 -i face2.jpg -br 0.5 -dc 0.2 -iL T -iS T -iH T
+
+Arguments:
+'-br','--blurring_amount';the blurring amount;range={0.0,1.5},
+'-dc','--darkening_coefficient';the darkening coefficient;range={0.0,1.0},
+'-iL','--is_LUT',enter T is you want to use the LUT filter,
+'-iS','--is_Sharpen',enter T is you want to use the Sharpen filter,
+'-iH','--is_Hist',enter T is you want to use the YCbCr Histogram equalization filter
+
+Commands for Problem 4:
+
+Main:
+python code.py -pn 4 -i face2.jpg -ss 2 -srad 100 -srot 0 -br 0.9
+py code.py -pn 4 -i face2.jpg -ss 2 -srad 100 -srot 0 -br 0.9
+python3 code.py -pn 4 -i face2.jpg -ss 2 -srad 100 -srot 0 -br 0.9
+
+Arguments:
+'-ss','--swirl_strength';swirl strength,
+'-srad','--swirl_radius';swirl radius,
+'-srot','--swirl_rotation',rotation of image(optional, keep 0 most of the time);
+'-br','--blurring_amount';the blurring amount;range={0.0,1.5}
